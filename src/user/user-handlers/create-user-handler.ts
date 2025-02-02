@@ -1,7 +1,9 @@
+import { dynamoDBUserRepository } from "../user-adapters/dynamodb.user.repository";
 import { localFileUserRepository } from "../user-adapters/local-file.user.repository";
 import { userService } from "../user.service";
 
-const userRepository = localFileUserRepository();
+// const userRepository = localFileUserRepository();
+const userRepository = dynamoDBUserRepository();
 
 const userServiceInstance = userService(userRepository);
 
@@ -52,20 +54,24 @@ export const listUsersHandler = async (event: any) => {
   }
 };
 
-createUserHandler({
-  body: JSON.stringify({
-    name: "John Doe",
-    email: "john@gmail.com",
-  }),
-}).then((user) => {
-  return createUserHandler({
-    body: JSON.stringify({
-      name: "Vishal Gautam",
-      email: "learnuidev@gmail.com",
-    }),
-  }).then(() => {
-    listUsersHandler({}).then((users) => {
-      console.log("USERS", users);
-    });
-  });
+// createUserHandler({
+//   body: JSON.stringify({
+//     name: "John Doe",
+//     email: "john@gmail.com",
+//   }),
+// }).then((user) => {
+//   return createUserHandler({
+//     body: JSON.stringify({
+//       name: "Vishal Gautam",
+//       email: "learnuidev@gmail.com",
+//     }),
+//   }).then(() => {
+//     listUsersHandler({}).then((users) => {
+//       console.log("USERS", users);
+//     });
+//   });
+// });
+
+listUsersHandler({}).then((users) => {
+  console.log("USERS", users);
 });
