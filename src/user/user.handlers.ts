@@ -1,6 +1,6 @@
-import { dynamoDBUserRepository } from "../adapters/dynamodb.user.repository";
-import { localFileUserRepository } from "../adapters/local-file.user.repository";
-import { userService } from "../user.service";
+import { dynamoDBUserRepository } from "./adapters/dynamodb.user.repository";
+import { localFileUserRepository } from "./adapters/local-file.user.repository";
+import { userService } from "./user.service";
 
 // const userRepository = localFileUserRepository();
 const userRepository = dynamoDBUserRepository();
